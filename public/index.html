@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>e621 Favorites</title>
+</head>
+<body>
+    <h1>e621 User Favorites</h1>
+    <button id="loadFavorites">Load Favorites</button>
+    <div id="favoritesList"></div>
+
+    <script>
+        document.getElementById('loadFavorites').addEventListener('click', async () => {
+            const response = await fetch('/favorites');
+            const favorites = await response.json();
+            const list = document.getElementById('favoritesList');
+            list.innerHTML = ''; // Clear the list
+            favorites.forEach(favorite => {
+                const item = document.createElement('div');
+                item.textContent = favorite.title; // Adjust based on actual API response structure
+                list.appendChild(item);
+            });
+        });
+    </script>
+</body>
+</html>
